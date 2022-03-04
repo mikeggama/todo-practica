@@ -6,12 +6,5 @@
       "password": "123456"
     }
   ],
-  "tareas": [
-    {
-      "nombre": "mike",
-      "descripcion": "cccccc",
-      "estatus": false,
-      "id": 1
-    }
-  ]
+  "tareas": []
 }

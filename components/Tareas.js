@@ -8,59 +8,7 @@ import {
 import { TodoContext } from "../context/TodoContext";
 
 const Tareas = () => {
-  const { tareas } = useContext(TodoContext);
-
-  const checkTask = async (items) => {
-    console.log(items.id);
-    try {
-      const url = `http://localhost:4000/tareas/${items.id}`;
-      if (items.estatus === true) {
-        const respuesta = await fetch(url, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-
-          body: JSON.stringify({
-            id: items.id,
-            nombre: items.nombre,
-            descripcion: items.descripcion,
-            estatus: false,
-          }),
-        });
-      } else {
-        const respuesta = await fetch(url, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-
-          body: JSON.stringify({
-            id: items.id,
-            nombre: items.nombre,
-            descripcion: items.descripcion,
-            estatus: true,
-          }),
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const deleteTask = async (items) => {
-    console.log(items.id);
-    try {
-      const url = `http://localhost:4000/tareas/${items.id}`;
-
-      const respuesta = await fetch(url, {
-        method: "DELETE",
-      });
-      const resultado = await respuesta.json();
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { tareas, checkTask, deleteTask } = useContext(TodoContext);
 
   return (
     <table className="table-auto">
