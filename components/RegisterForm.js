@@ -1,9 +1,42 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import LoginButton from "./Button";
-import { TodoContext } from "../context/TodoContext";
+import { useRouter } from "next/router";
 
-const LoginForm = () => {
-  const { handleChange, error, handleSubmit } = useContext(TodoContext);
+const RegisterForm = () => {
+  const [error, setError] = useState("");
+  const [formData, setFormData] = useState({
+    nombre: "",
+    email: "",
+    password: "",
+  });
+  const router = useRouter();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const url = "http://localhost:4000/users";
+      const respuesta = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const resultado = await respuesta.json();
+      if (resultado.accessToken) {
+        router.push("/");
+      } else {
+        setError(resultado);
+      }
+    } catch (error) {
+      console.log(error);
+      setError(resultado);
+    }
+  };
+
+  function handleChange(e) {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
 
   return (
     <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -15,11 +48,27 @@ const LoginForm = () => {
             alt="Workflow"
           />
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Login con tu cuenta
+            Registra una cuenta
           </h2>
         </div>
-        <form className="mt-8 space-y-6" onSubmit={(e) => handleSubmit(e)}>
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm -space-y-px">
+            <div>
+              <label htmlFor="nombre" className="sr-only">
+                Nombre
+              </label>
+              <input
+                id="nombre"
+                name="nombre"
+                type="text"
+                autoComplete="nombre"
+                required
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="Nombre Completo"
+                onChange={handleChange}
+                value={formData.nombre}
+              />
+            </div>
             <div>
               <label htmlFor="email-address" className="sr-only">
                 Email
@@ -32,7 +81,8 @@ const LoginForm = () => {
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Direccion de email"
-                onChange={(e) => handleChange(e)}
+                onChange={handleChange}
+                value={formData.email}
               />
             </div>
             <div>
@@ -47,14 +97,15 @@ const LoginForm = () => {
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Contraseña"
-                onChange={(e) => handleChange(e)}
+                onChange={handleChange}
+                value={formData.password}
               />
             </div>
             <p className="text-red-600 text-center">{error}</p>
           </div>
 
           <div>
-            <LoginButton label="Entrar" />
+            <LoginButton label="Registrar" />
           </div>
         </form>
       </div>
@@ -62,4 +113,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default RegisterForm;

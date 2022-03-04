@@ -1,8 +1,49 @@
 import React, { createContext, useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
 export const TodoContext = createContext();
 
 const TodoProvider = (props) => {
+  //GENERAL
+  const [error, setError] = useState("");
+  const router = useRouter();
+
+  //USER SECTION
+  const [usuario, setUsuario] = useState({});
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const url = "http://localhost:4000/login";
+      const respuesta = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const resultado = await respuesta.json();
+      if (resultado.accessToken) {
+        setUsuario(resultado);
+
+        router.push("/home");
+      } else {
+        setError(resultado);
+      }
+      console.log(resultado);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  function handleChange(e) {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
+
+  //TODO SECTION
   const [tareas, setTareas] = useState([]);
   const [tarea, setTarea] = useState({
     nombre: "",
@@ -110,6 +151,11 @@ const TodoProvider = (props) => {
   return (
     <TodoContext.Provider
       value={{
+        handleChange,
+        handleSubmit,
+        error,
+        usuario,
+
         tareas,
         tarea,
         setTareas,

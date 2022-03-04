@@ -1,9 +1,28 @@
 {
   "users": [
     {
-      "id": 1,
-      "user": "admin",
-      "password": "123456"
+      "nombre": "Miguel Angel Hernandez Gama",
+      "email": "ventas@gabatta.mx",
+      "password": "$2a$10$OfVsxgTVlcXb7D2ZETfJOeq8m1d.LV4rW.DegGAkZryrWbqlDONKm",
+      "id": 1
+    },
+    {
+      "email": "mike@ibot.mx",
+      "password": "$2a$10$NJO9XBBwRI1LOcXPAdFyO.AjJ0z87Nb9aZjMnT4jVkouJxDc1DgQe",
+      "nombre": "Arturo Gonzalez",
+      "id": 2
+    },
+    {
+      "email": "ventass@gabatta.mx",
+      "password": "$2a$10$xSoF30zQAm7Xl5J28GiO2eEidBhnnOiT89vK4uk1cqU0QMlaT0cSm",
+      "nombre": "Karla",
+      "id": 3
+    },
+    {
+      "email": "mikes@ibot.mx",
+      "password": "$2a$10$L5WTKFXCjIr/kisD/M.pROWIZndWWahZSNA5Duhs.gCz9Mv3p2/fS",
+      "nombre": "Arturo Gonzales",
+      "id": 4
     }
   ],
   "tareas": []
