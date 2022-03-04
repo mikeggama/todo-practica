@@ -53,7 +53,9 @@ const Layout = ({ usuario }) => {
                     </Menu.Button>
                   </div>
                 </Menu>
-                <h2 className="mx-2 text-white">{usuario.user.nombre}</h2>
+                <h2 className="mx-2 text-white text-xs">
+                  {usuario.user.nombre}
+                </h2>
                 <button
                   type="button"
                   className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
