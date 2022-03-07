@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import LoginButton from "./Button";
 import { TodoContext } from "../context/TodoContext";
+import Link from "next/link";
 
 const LoginForm = () => {
   const { handleChange, error, handleSubmit } = useContext(TodoContext);
@@ -51,6 +52,14 @@ const LoginForm = () => {
               />
             </div>
             <p className="text-red-600 text-center">{error}</p>
+          </div>
+          <div>
+            <p className="text-center">
+              ¿No tienes cuenta?{" "}
+              <Link href="/registro">
+                <a className="text-violet-900">crea una gratis</a>
+              </Link>
+            </p>
           </div>
 
           <div>

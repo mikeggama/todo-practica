@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import LoginButton from "./Button";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const RegisterForm = () => {
   const [error, setError] = useState("");
@@ -102,6 +103,14 @@ const RegisterForm = () => {
               />
             </div>
             <p className="text-red-600 text-center">{error}</p>
+          </div>
+          <div>
+            <p className="text-center">
+              Ya tienes una cuenta{" "}
+              <Link href="/">
+                <a className="text-violet-900">entrar con tu cuenta</a>
+              </Link>
+            </p>
           </div>
 
           <div>
